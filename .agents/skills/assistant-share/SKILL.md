@@ -23,6 +23,10 @@ Use a different destination only when all three conditions hold:
 
 If any condition fails, stop and report the mismatch before editing or
 handing off. Do not select a substitute or change `origin` to make it match.
+Without an explicitly named alternate, keep AGEL as the target. If the
+supplied checkout's actual origin differs, report that mismatch and stop.
+AGEL names in its README or catalog metadata do not make a different origin
+match; never report an identity check as passed on that basis.
 Keep the AGEL identity in the catalog, plugin manifests and participant-facing
 documentation. The exception changes only this contribution's destination,
 not the personal assistant repository's `origin` or template-update workflow.
