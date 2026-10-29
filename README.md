@@ -126,12 +126,24 @@ Ask `assistant-share` to generalize one of your personal skills. It prepares
 a separate candidate under `sharing/<name>/`, removes private details and
 asks you to confirm the proposed contribution.
 
-Sharing goes only through
+By default, sharing goes through
 [`agel-data-and-ai-temp-poc/copilot-marketplace`](https://github.com/agel-data-and-ai-temp-poc/copilot-marketplace).
-You must be able to **create a branch and open a pull request** there.
+You must be able to **create a branch and open a pull request** at the
+resolved destination.
 The `marketplace-maintenance` plugin must provide `marketplace-create-skill`
 and `marketplace-submit-update`; `assistant-share` hands off to them for
 plugin placement, validation, versioning and the PR.
+
+For an explicitly requested rehearsal or contribution elsewhere, all three
+checks must pass: you name the target as `owner/repo` in your request, the
+marketplace checkout's `origin` points to that exact repository (inspect the
+HTTPS/SSH host and owner/repository, ignoring only an optional `.git` suffix),
+and `.github/plugin/marketplace.json` has `"name": "copilot-marketplace"`.
+Otherwise the workflow stops; it must not infer a substitute or retarget
+`origin`. The output, both handoffs and any PR disclose the exception. Keep
+AGEL catalog/plugin metadata and participant documentation unchanged. This
+exception does not change your personal assistant's `origin` or update
+workflow.
 
 Register the shared marketplace and install the workshop plugins with
 these Copilot CLI commands:

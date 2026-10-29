@@ -6,23 +6,45 @@ description: "Generalize a personal skill for the AGEL marketplace and hand it t
 # Share a personal skill
 
 Prepare a reusable contribution to
-`agel-data-and-ai-temp-poc/copilot-marketplace`.
+`agel-data-and-ai-temp-poc/copilot-marketplace` by default.
+
+## Explicit destination exception
+
+Use a different destination only when all three conditions hold:
+
+1. The user explicitly names the destination as `owner/repo` in their request.
+2. The marketplace checkout's `origin`, read with
+   `git -C "<marketplace-root>" remote get-url origin`, points to that exact
+   repository. Inspect its host and owner/repository for HTTPS or SSH remotes;
+   ignore only an optional `.git` suffix. An origin alone or an inferred
+   handoff is not authorization.
+3. `<marketplace-root>/.github/plugin/marketplace.json` has
+   `"name": "copilot-marketplace"`.
+
+If any condition fails, stop and report the mismatch before editing or
+handing off. Do not select a substitute or change `origin` to make it match.
+Keep the AGEL identity in the catalog, plugin manifests and participant-facing
+documentation. The exception changes only this contribution's destination,
+not the personal assistant repository's `origin` or template-update workflow.
+State the exception in the output and carry the user's explicit target and
+the three checks into both marketplace skill handoffs. Recheck them before
+any push or PR; the PR must disclose the exception too.
 
 ## Steps
 
 1. Read the selected personal skill and every supporting file it uses.
-   Clarify the reusable goal and intended audience. The AGEL marketplace
-   is the only sharing destination for this workflow.
+   Clarify the reusable goal and intended audience. Default to the AGEL
+   marketplace; resolve an explicitly requested destination using the
+   exception rule above before editing or handing off.
 2. State the prerequisite before submission: the participant must be able
-   to create a branch and open a pull request in
-   `agel-data-and-ai-temp-poc/copilot-marketplace`.
+   to create a branch and open a pull request in the resolved marketplace.
    Also check that `marketplace-create-skill` and
    `marketplace-submit-update` from the `marketplace-maintenance` plugin
    are available. If either prerequisite is missing, prepare the local
    candidate but stop before submission, name the missing prerequisite,
    and ask the workshop facilitator for access or plugin installation.
    Use the documented `copilot-marketplace` installation commands in
-   `README.md`; keep this contribution's destination on the AGEL copy.
+   `README.md`; never infer an alternate destination from plugin installation.
 3. Prepare the generalized candidate under the participant-owned
    `sharing/<name>/` directory in the personal assistant repository.
    Preserve the original personal skill. Include the required supporting
@@ -77,4 +99,5 @@ Prepare a reusable contribution to
 - The handoff's root and base belong to the marketplace checkout, all
   required checks completed there, and their actual results are reported.
 - The participant knows that sharing requires a branch and PR in the
-  AGEL marketplace. A local candidate alone is not a published skill.
+  resolved marketplace. Any explicit destination exception is verified and
+  disclosed. A local candidate alone is not a published skill.
