@@ -37,21 +37,44 @@ Prepare a reusable contribution to
    categories, without repeating sensitive values. Ask the user to
    confirm the candidate and the marketplace destination before handing
    it off for publication.
-5. Invoke `marketplace-create-skill` and follow its installed instructions
-   for plugin selection, naming, layout, frontmatter and validation.
-   Supply the candidate's path, purpose, trigger situations, supporting
-   files and the confirmed destination. That skill owns creation in the
-   marketplace clone; do not substitute a personal assistant push.
-6. Continue with `marketplace-submit-update` for its branch, version,
-   validation, PR and review workflow. It may already be invoked by the
-   creation skill; continue the same submission rather than creating a
-   second PR. Follow the currently installed instructions and report the
-   actual PR or the precise blocked step.
+5. Establish the handoff before any marketplace edit. Keep the assistant
+   root and marketplace root as two distinct absolute paths. Verify the
+   marketplace root and capture its base commit with:
+
+   ```shell
+   git -C "<marketplace-root>" rev-parse --show-toplevel
+   git -C "<marketplace-root>" rev-parse HEAD
+   ```
+
+   Replace the placeholder with the confirmed checkout. The returned root
+   must be that checkout, and the base must come from it, not from the
+   assistant repository. Carry this handoff across confirmation turns:
+   candidate path, confirmed destination, marketplace root, base commit,
+   approved shared name, behavior, version changes and requested stop point.
+6. Invoke `marketplace-create-skill` with the available skill-invocation
+   tool and supply that handoff. Reading its `SKILL.md` alone is not the
+   handoff; do not implement its workflow inline instead of invoking it.
+   Follow its installed instructions for placement and validation.
+   Marketplace work belongs in the marketplace checkout: use `git -C`
+   for Git commands, and set that checkout as the working directory in
+   **every** shell call that runs npm or the validator. A previous shell's
+   `Set-Location` does not carry into a new call.
+7. Invoke `marketplace-submit-update` for the same contribution and pass
+   the same marketplace root and recorded base. If the creation skill
+   already invoked it, continue that invocation rather than making a
+   second submission. Await each dependency install, test and validator
+   command to completion in order. If a check fails, report its command,
+   working directory and error before correcting the cause; an install
+   failure is not permission to invent a package file or skip the check.
+   Follow the requested stop point, including a local-only rehearsal's
+   prohibition on push/PR. Report the actual PR or the precise pending step.
 
 ## Done when
 
 - A generalized candidate preserves the original and has user approval.
 - Both marketplace skills received the handoff, or a missing prerequisite
   is explicitly reported as blocking submission.
+- The handoff's root and base belong to the marketplace checkout, all
+  required checks completed there, and their actual results are reported.
 - The participant knows that sharing requires a branch and PR in the
   AGEL marketplace. A local candidate alone is not a published skill.
