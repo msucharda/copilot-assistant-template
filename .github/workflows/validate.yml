@@ -1,0 +1,54 @@
+name: Validate template
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - name: Install validation dependency
+        run: python -m pip install -r requirements-dev.txt
+      - name: Prepare verified gh skill version
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tools = Join-Path $env:RUNNER_TEMP "template-gh"
+          New-Item -ItemType Directory -Path $tools | Out-Null
+          $platform = if ($IsWindows) { "windows" } else { "linux" }
+          $extension = if ($IsWindows) { "zip" } else { "tar.gz" }
+          $asset = "gh_2.102.1_${platform}_amd64.$extension"
+          gh release download v2.102.1 --repo cli/cli --pattern $asset --dir $tools
+          if ($LASTEXITCODE -ne 0) { throw "Cannot download gh 2.102.1" }
+          $archive = Join-Path $tools $asset
+          if ($IsWindows) {
+            Expand-Archive -LiteralPath $archive -DestinationPath $tools
+          } else {
+            tar -xzf $archive -C $tools
+            if ($LASTEXITCODE -ne 0) { throw "Cannot extract gh 2.102.1" }
+          }
+          $executable = if ($IsWindows) { "gh.exe" } else { "gh" }
+          $binary = Get-ChildItem -LiteralPath $tools -Recurse -File -Filter $executable |
+            Select-Object -First 1
+          if (-not $binary) { throw "Downloaded gh executable is missing" }
+          $binary.DirectoryName >> $env:GITHUB_PATH
+      - name: Validate template
+        run: python scripts/validate.py
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
