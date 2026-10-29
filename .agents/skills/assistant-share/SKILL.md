@@ -35,13 +35,15 @@ git -C "<marketplace-root>" remote get-url --all origin
 git -C "<marketplace-root>" remote get-url --push --all origin
 ```
 
-Check each command's exit code and output. On error, empty output, or any URL
-outside the resolved host and `owner/repo`, stop and report the mismatch.
+Use Git's expanded output, including `insteadOf` and `pushInsteadOf`. Stop on
+command errors, empty output, unsupported URLs or any URL outside the approved
+GitHub host and exact `owner/repo`, ignoring only an optional `.git` suffix.
 Inspect every returned URL, not just the first: `pushurl` can differ from the
 fetch URL, and multiple push URLs can cause writes to multiple repositories.
 Carry both verified URL lists into both handoffs and require the same check
-again immediately before any push or PR. Address a permitted push explicitly
-to the verified `origin`; do not rely on an implicit push remote.
+again immediately before each push in the same Git configuration context and
+before a PR. Address a permitted push explicitly to the verified `origin`;
+do not rely on an implicit push remote.
 
 Keep the AGEL identity in the catalog, plugin manifests and participant-facing
 documentation. The exception changes only this contribution's destination,
