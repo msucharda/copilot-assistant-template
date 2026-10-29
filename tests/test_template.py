@@ -83,16 +83,18 @@ class TemplateValidationTests(unittest.TestCase):
 
 
 class TemplateUpgradeTests(unittest.TestCase):
-    def test_git_pull_preserves_participant_profile_learnings_and_skills(self):
+    def test_git_pull_preserves_participant_content_with_inherited_ff_only(self):
         with tempfile.TemporaryDirectory(prefix="assistant upgrade ") as directory:
             temporary = Path(directory)
             upstream = temporary / "shared template"
             participant = temporary / "personal assistant"
             hooks = temporary / "empty hooks"
             hooks.mkdir()
+            inherited_config = temporary / "inherited.gitconfig"
+            inherited_config.write_text("[pull]\n\tff = only\n", encoding="utf-8")
             environment = os.environ.copy()
             environment.update(
-                GIT_CONFIG_GLOBAL=os.devnull,
+                GIT_CONFIG_GLOBAL=str(inherited_config),
                 GIT_CONFIG_NOSYSTEM="1",
                 GIT_TERMINAL_PROMPT="0",
                 GIT_MERGE_AUTOEDIT="no",
@@ -134,6 +136,7 @@ class TemplateUpgradeTests(unittest.TestCase):
             git(temporary, "clone", str(upstream), str(participant))
             identity(participant)
             git(participant, "config", "pull.rebase", "false")
+            git(participant, "config", "pull.ff", "true")
             original_origin = git(participant, "remote", "get-url", "origin")
 
             profile = (

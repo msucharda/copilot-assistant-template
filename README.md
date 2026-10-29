@@ -21,6 +21,7 @@ PowerShell; participant operating systems still need confirmation.
    git clone https://github.com/agel-data-and-ai-temp-poc/copilot-assistant-template.git my-coding-assistant
    cd my-coding-assistant
    git config --local pull.rebase false
+   git config --local pull.ff true
    ```
 
    Keep `origin` pointing to this shared template. Use a clone, not a fork
@@ -153,8 +154,9 @@ git status
 git pull
 ```
 
-Setup configures `pull.rebase=false` in this clone so `git pull` merges newer
-template commits with your local commits. Your personal history remains local.
+Setup configures `pull.rebase=false` and `pull.ff=true` in this clone so
+`git pull` merges newer template commits with your local commits even if your
+global configuration requires fast-forward-only pulls. Your personal history remains local.
 The path ownership contract keeps those edits separate:
 
 | Owner | Paths |

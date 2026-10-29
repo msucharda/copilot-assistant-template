@@ -29,15 +29,20 @@ Capture a confirmed lesson where the next relevant session can find it.
    `.agents/skills/assistant-*` directory are template-owned and must remain
    unchanged. If a lesson concerns a maintenance skill, propose a personal
    note in `AGENTS.md` instead of patching that skill.
+   Inspect Git status and both staged and unstaged diffs for the selected
+   target files before proposing the patch. If a target already has edits
+   or untracked content, pause for the user to commit or separate that work.
+   Committing only a path does not isolate individual edits within the file.
 3. Present the exact proposed text, destination path and reason it will
    help again. Include any new reference from `AGENTS.md` or `SKILL.md`
    needed to make a separate note discoverable. Ask the user to confirm
    this complete change and wait for an explicit answer.
    Rejection or no answer means no writes and no commit.
-4. Apply only the confirmed change in English. Preserve unrelated edits.
-   If it changes or creates a personal skill, invoke `assistant-skill`
-   with the approved change to finish the skill and install/reinstall it.
-   That skill handles the local commit; do not make a duplicate commit.
+4. For a profile or note, apply only the confirmed change in English.
+   Preserve unrelated edits. If the lesson changes or creates a personal
+   skill, pass the approved patch to `assistant-skill` **before** writing it.
+   That skill applies the patch, installs/reinstalls it and handles the
+   local commit; do not pre-apply the patch or make a duplicate commit.
 5. For a profile or note change, inspect the diff and commit only the
    confirmed participant-owned paths. Stage those exact paths, then use
    `git commit --only -m "Record a confirmed assistant learning" -- <paths>`

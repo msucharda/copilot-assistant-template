@@ -15,6 +15,11 @@ for use in every code repository.
    that repository root. Ask for the task, trigger situations and expected
    result when missing. A previously confirmed `assistant-learn` change
    supplies these requirements; avoid asking for the same approval again.
+   Before editing, inspect status and staged/unstaged diffs of the intended
+   target files. If they contain pre-existing changes or untracked content,
+   pause for the user to commit or separate that work. A path-only commit
+   includes all edits in each selected file. For a reinstall-only request,
+   install the current source without committing pre-existing edits.
 2. Agree on an English kebab-case name of at most 64 characters.
    Use `.agents/skills/<name>/` for source files. The `assistant-*`
    namespace belongs to the four template maintenance skills; choose a
@@ -69,5 +74,5 @@ for use in every code repository.
 - The English source skill exists under `.agents/skills/<name>/`.
 - The current source was installed or reinstalled at user scope with the
   command above, and the copied content was inspected.
-- Source changes have a local commit, and the trial result is stated
+- Source changes made by this run have a local commit, and the trial result is stated
   accurately, including any pending live verification.

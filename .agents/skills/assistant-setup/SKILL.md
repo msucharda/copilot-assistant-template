@@ -12,7 +12,9 @@ Turn the participant's answers into a concise, English `AGENTS.md`.
 1. Locate the user's personal assistant repository and read its `AGENTS.md`
    and `README.md`. If this session is in another repository, ask for the
    assistant repository path before editing. Inspect the working tree and
-   preserve existing participant content.
+   preserve existing participant content. If `AGENTS.md` already has staged
+   or unstaged changes, pause for the user to commit or separate them before
+   continuing. A path-only commit also includes unrelated edits in that file.
 2. Ask one question at a time about each unfilled area:
    - Role: what work should the assistant help with?
    - Team: how does the team collaborate?
@@ -30,8 +32,11 @@ Turn the participant's answers into a concise, English `AGENTS.md`.
 
    ```shell
    git config --local pull.rebase false
+   git config --local pull.ff true
    ```
 
+   The second setting overrides an inherited `pull.ff=only`, which would
+   otherwise reject the participant's divergent local history.
    Keep `origin` unchanged. Check that Git has a commit identity. If it is
    missing, ask the user to configure an identity for this repository; do
    not invent one or change global configuration.

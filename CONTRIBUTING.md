@@ -48,7 +48,9 @@ behavior and trigger quality manually; metadata validation cannot prove them.
 The Git integration test uses real temporary repositories. It makes a local
 participant commit with a filled `AGENTS.md`, a learning and a personal
 skill, then updates both template-owned path types and runs **`git pull`**.
-It checks preservation, a clean working tree and the merge history.
+It inherits a synthetic global `pull.ff=only` and applies setup's local
+`pull.rebase=false` and `pull.ff=true` settings. It checks preservation, a
+clean working tree and the merge history without changing real global config.
 
 The CLI integration test installs and reinstalls through `gh skill` using
 an explicit temporary **`--dir`**. It checks copied files and
@@ -66,7 +68,7 @@ Keep the observed result separate from the intended behavior.
 | Criterion | Check | Evidence to record |
 |---|---|---|
 | AC1 | Fresh clone; invoke `assistant-setup`; answer all four areas; confirm the profile. | Filled `AGENTS.md`, local commit, unchanged `origin` |
-| AC2 | Invoke `assistant-learn`; reject one proposal, then confirm one. | No write on rejection; confirmed participant-only diff and local commit |
+| AC2 | Invoke `assistant-learn` with a pre-existing edit in its target; separate that work, reject one proposal, then confirm one. | Pause for pre-existing edits; no write on rejection; only the confirmed learning enters its local commit |
 | AC3 | Create a personal skill with `assistant-skill`, use it in another repository, change it and run the skill again. | User-scope installation, observed behavior, refreshed installed content |
 | AC4 | Invoke `assistant-share` with a personal skill and the marketplace plugin available. | Generalized candidate, branch/PR prerequisite stated, both marketplace skill handoffs |
 | AC5 | Run the automated clone/pull test. | Conflict-free merge retaining participant content |
