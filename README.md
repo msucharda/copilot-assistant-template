@@ -140,7 +140,11 @@ marketplace checkout's `origin` points to that exact repository (inspect the
 HTTPS/SSH host and owner/repository, ignoring only an optional `.git` suffix),
 and `.github/plugin/marketplace.json` has `"name": "copilot-marketplace"`.
 Otherwise the workflow stops; it must not infer a substitute or retarget
-`origin`. The output, both handoffs and any PR disclose the exception. Keep
+`origin`. For both the default AGEL target and an exception, the skill checks
+**all effective fetch and push URLs** before editing or handing off and
+again immediately before push/PR. A different `pushurl`, any additional
+unapproved URL, a failed lookup or an empty result stops the workflow.
+The output, both handoffs and any PR disclose the exception. Keep
 AGEL catalog/plugin metadata and participant documentation unchanged. This
 exception does not change your personal assistant's `origin` or update
 workflow.
