@@ -28,7 +28,10 @@ Turn the participant's answers into a concise, English `AGENTS.md`.
    learnings, and ask the user to confirm it. Wait for confirmation before
    writing. Replace the setup placeholders with the confirmed answers.
    Keep the file short; procedural instructions belong in personal skills.
-4. Configure merge-based template updates in this clone:
+4. Run steps 4-5 from the confirmed assistant repository root, even if the
+   session started in another repository. Set that working directory for
+   each command, or pass the root with `git -C`. Configure merge-based
+   template updates in the assistant clone:
 
    ```shell
    git config --local pull.rebase false

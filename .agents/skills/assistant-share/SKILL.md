@@ -6,7 +6,7 @@ description: "Generalize a personal skill for the AGEL marketplace and hand it t
 # Share a personal skill
 
 Prepare a reusable contribution to
-`agel-data-and-ai-temp-poc/ai-dev-marketplace`.
+`agel-data-and-ai-temp-poc/copilot-marketplace`.
 
 ## Steps
 
@@ -15,13 +15,14 @@ Prepare a reusable contribution to
    is the only sharing destination for this workflow.
 2. State the prerequisite before submission: the participant must be able
    to create a branch and open a pull request in
-   `agel-data-and-ai-temp-poc/ai-dev-marketplace`.
+   `agel-data-and-ai-temp-poc/copilot-marketplace`.
    Also check that `marketplace-create-skill` and
    `marketplace-submit-update` from the `marketplace-maintenance` plugin
    are available. If either prerequisite is missing, prepare the local
    candidate but stop before submission, name the missing prerequisite,
    and ask the workshop facilitator for access or plugin installation.
-   Do not invent plugin installation commands.
+   Use the documented `copilot-marketplace` installation commands in
+   `README.md`; keep this contribution's destination on the AGEL copy.
 3. Prepare the generalized candidate under the participant-owned
    `sharing/<name>/` directory in the personal assistant repository.
    Preserve the original personal skill. Include the required supporting

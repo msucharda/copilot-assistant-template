@@ -5,8 +5,8 @@ and build coding skills that improve with use. This template supports the
 AGEL GitHub Copilot workshop on **2 November 2026**. All workshop work happens
 in the **GitHub Copilot desktop app**.
 
-This repository is the **development copy**. Workshop participants clone the
-internal AGEL copy below, not this development repository.
+Workshop participants clone the **internal AGEL template** below. Maintainers
+develop the template in a separate repository before publishing it there.
 
 ## Start here
 
@@ -76,7 +76,10 @@ does not configure them.
 
 ## Capture a lesson
 
-After a correction or non-obvious discovery, ask:
+After a correction or non-obvious discovery, open a session over your
+personal assistant repository. If the lesson came from a code-repository
+session, bring over the relevant context, correction and observed result.
+Then ask:
 
 > Use assistant-learn to propose one useful lesson from this session.
 
@@ -98,7 +101,7 @@ The skill never edits the shared `assistant-*` maintenance skills.
    give that Copilot session its absolute `SKILL.md` path and ask it to follow
    the file, for example:
 
-   > Read D:\work\my-coding-assistant\.agents\skills\my-review\SKILL.md and use it for this task.
+   > Read `D:\work\my-coding-assistant\.agents\skills\my-review\SKILL.md` and use it for this task.
 
 3. `assistant-skill` installs the current source itself. The command, run from
    this assistant repository with `<name>` replaced by the real skill name, is:
@@ -124,19 +127,30 @@ a separate candidate under `sharing/<name>/`, removes private details and
 asks you to confirm the proposed contribution.
 
 Sharing goes only through
-[`agel-data-and-ai-temp-poc/ai-dev-marketplace`](https://github.com/agel-data-and-ai-temp-poc/ai-dev-marketplace).
+[`agel-data-and-ai-temp-poc/copilot-marketplace`](https://github.com/agel-data-and-ai-temp-poc/copilot-marketplace).
 You must be able to **create a branch and open a pull request** there.
 The `marketplace-maintenance` plugin must provide `marketplace-create-skill`
 and `marketplace-submit-update`; `assistant-share` hands off to them for
 plugin placement, validation, versioning and the PR.
 
-The desktop app's marketplace plugin installation route is not yet verified.
-Ask the facilitator to make the required plugin available; this guide does
-not invent a Customize UI sequence or CLI command.
+Register the shared marketplace and install the workshop plugins with
+these Copilot CLI commands:
 
-The workshop's Matt Pocock skills come from a **separately vendored plugin in
-the AGEL marketplace**. Do not also install the upstream `mattpocock/skills`
-plugin: that creates duplicate skills. This template contains no domain skills.
+```shell
+copilot plugin marketplace add agel-data-and-ai-temp-poc/copilot-marketplace
+copilot plugin install marketplace-maintenance@copilot-marketplace
+copilot plugin install matt-pocock-skills@copilot-marketplace
+```
+
+The marketplace is named `copilot-marketplace`. The `marketplace-maintenance`
+plugin also provides `marketplace-install` for installation help.
+These documented commands still need a participant trial in the desktop app;
+ask the facilitator if installation or marketplace access fails.
+
+The workshop's Matt Pocock skills come from the **`matt-pocock-skills` plugin
+vendored in this AGEL marketplace**. Do not also install the upstream
+`mattpocock/skills` plugin: that creates duplicate skills.
+This template contains no domain skills.
 
 ## Optional Jira connection
 

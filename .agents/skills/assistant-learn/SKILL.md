@@ -10,7 +10,9 @@ Capture a confirmed lesson where the next relevant session can find it.
 ## Steps
 
 1. Locate the personal assistant repository and read its `AGENTS.md` and
-   relevant personal skills. Inspect existing lessons to avoid duplicates.
+   relevant personal skills. Run every Git command from that confirmed
+   assistant repository root, not an unrelated code repository where the
+   session may have started. Inspect existing lessons to avoid duplicates.
    Identify one reusable correction, recovery or non-obvious discovery.
    If there is no useful new lesson, say so and stop without editing.
 2. Choose the knowledge layer:

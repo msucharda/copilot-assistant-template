@@ -76,8 +76,9 @@ Keep the observed result separate from the intended behavior.
 
 AC1-AC4 remain open until observed in the real app. Do not claim a prompt
 inspection or CLI-copy test completes them. Marketplace access is required
-for an actual submission. The app's plugin installation route, participant
-operating systems and AGEL Jira connection are not yet verified.
+for an actual submission. The documented `copilot-marketplace` plugin
+installation commands still need a participant trial in the desktop app.
+Participant operating systems and the AGEL Jira connection remain unverified.
 
 ## Milestones and publication
 
