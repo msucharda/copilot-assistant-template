@@ -84,9 +84,9 @@ Participant operating systems and the AGEL Jira connection remain unverified.
 
 - v0: review-ready PR by 30 October 2026, 10:00 CET; colleague trial at 13:30.
 - v1: 1 November 2026, 18:00 CET.
-- The coordinator publishes approved milestones of this development
-  repository's `main` to the internal AGEL copy. This implementation task
-  does not write to the AGEL organization.
+- Maintainers publish approved milestones on `main` in the public
+  `msucharda/copilot-assistant-template` repository. Workshop participants
+  clone and update from that repository.
 
 Use `Part of #1` in the PR while real-app criteria remain open. Record live
 checks, open questions, deviations and follow-ups in the PR.

@@ -6,7 +6,7 @@ description: "Generalize a personal skill for the AGEL marketplace and hand it t
 # Share a personal skill
 
 Prepare a reusable contribution to
-`agel-data-and-ai-temp-poc/copilot-marketplace` by default.
+`msucharda/copilot-marketplace` by default.
 
 ## Explicit destination exception
 

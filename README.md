@@ -5,12 +5,12 @@ and build coding skills that improve with use. This template supports the
 AGEL GitHub Copilot workshop on **2 November 2026**. All workshop work happens
 in the **GitHub Copilot desktop app**.
 
-Workshop participants clone the **internal AGEL template** below. Maintainers
-develop the template in a separate repository before publishing it there.
+Workshop participants clone the **public template hosted by `msucharda`**
+below. Maintainers publish template updates in that same repository.
 
 ## Start here
 
-You need Git, access to the AGEL template, and a working Copilot desktop app.
+You need Git and a working Copilot desktop app. The template is public.
 The app bundles GitHub CLI; `gh skill` is a preview feature. The documented
 command was verified with **gh 2.102.1**. Examples assume Windows and
 PowerShell; participant operating systems still need confirmation.
@@ -18,7 +18,7 @@ PowerShell; participant operating systems still need confirmation.
 1. Clone the shared template into your own local folder:
 
    ```powershell
-   git clone https://github.com/agel-data-and-ai-temp-poc/copilot-assistant-template.git my-coding-assistant
+   git clone https://github.com/msucharda/copilot-assistant-template.git my-coding-assistant
    cd my-coding-assistant
    git config --local pull.rebase false
    git config --local pull.ff true
@@ -127,7 +127,7 @@ a separate candidate under `sharing/<name>/`, removes private details and
 asks you to confirm the proposed contribution.
 
 By default, sharing goes through
-[`agel-data-and-ai-temp-poc/copilot-marketplace`](https://github.com/agel-data-and-ai-temp-poc/copilot-marketplace).
+the public [`msucharda/copilot-marketplace`](https://github.com/msucharda/copilot-marketplace).
 You must be able to **create a branch and open a pull request** at the
 resolved destination.
 The `marketplace-maintenance` plugin must provide `marketplace-create-skill`
@@ -153,7 +153,7 @@ Register the shared marketplace and install the workshop plugins with
 these Copilot CLI commands:
 
 ```shell
-copilot plugin marketplace add agel-data-and-ai-temp-poc/copilot-marketplace
+copilot plugin marketplace add msucharda/copilot-marketplace
 copilot plugin install marketplace-maintenance@copilot-marketplace
 copilot plugin install matt-pocock-skills@copilot-marketplace
 ```
